@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       home: Material(
         child: Center(
             child: Container(
-          child: const Text("Welcome to Vehicle Tracking App"),
+          child: const Text("Fyp-Vehicle Tracking App"),
         )
         ),
       ),
