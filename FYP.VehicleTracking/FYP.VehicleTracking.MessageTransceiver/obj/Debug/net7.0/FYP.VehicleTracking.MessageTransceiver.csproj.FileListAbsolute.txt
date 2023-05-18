@@ -1,0 +1,12 @@
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.MessageTransceiver\bin\Debug\net7.0\FYP.VehicleTracking.MessageTransceiver.deps.json
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.MessageTransceiver\bin\Debug\net7.0\FYP.VehicleTracking.MessageTransceiver.dll
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.MessageTransceiver\bin\Debug\net7.0\FYP.VehicleTracking.MessageTransceiver.pdb
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.MessageTransceiver\obj\Debug\net7.0\FYP.VehicleTracking.MessageTransceiver.csproj.AssemblyReference.cache
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.MessageTransceiver\obj\Debug\net7.0\FYP.VehicleTracking.MessageTransceiver.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.MessageTransceiver\obj\Debug\net7.0\FYP.VehicleTracking.MessageTransceiver.AssemblyInfoInputs.cache
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.MessageTransceiver\obj\Debug\net7.0\FYP.VehicleTracking.MessageTransceiver.AssemblyInfo.cs
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.MessageTransceiver\obj\Debug\net7.0\FYP.VehicleTracking.MessageTransceiver.csproj.CoreCompileInputs.cache
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.MessageTransceiver\obj\Debug\net7.0\FYP.VehicleTracking.MessageTransceiver.dll
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.MessageTransceiver\obj\Debug\net7.0\refint\FYP.VehicleTracking.MessageTransceiver.dll
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.MessageTransceiver\obj\Debug\net7.0\FYP.VehicleTracking.MessageTransceiver.pdb
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.MessageTransceiver\obj\Debug\net7.0\ref\FYP.VehicleTracking.MessageTransceiver.dll

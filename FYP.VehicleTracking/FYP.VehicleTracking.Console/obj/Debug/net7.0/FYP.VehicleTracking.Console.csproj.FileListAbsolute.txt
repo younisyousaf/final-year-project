@@ -1,0 +1,15 @@
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.Console\bin\Debug\net7.0\FYP.VehicleTracking.Console.exe
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.Console\bin\Debug\net7.0\FYP.VehicleTracking.Console.deps.json
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.Console\bin\Debug\net7.0\FYP.VehicleTracking.Console.runtimeconfig.json
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.Console\bin\Debug\net7.0\FYP.VehicleTracking.Console.dll
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.Console\bin\Debug\net7.0\FYP.VehicleTracking.Console.pdb
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.Console\obj\Debug\net7.0\FYP.VehicleTracking.Console.csproj.AssemblyReference.cache
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.Console\obj\Debug\net7.0\FYP.VehicleTracking.Console.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.Console\obj\Debug\net7.0\FYP.VehicleTracking.Console.AssemblyInfoInputs.cache
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.Console\obj\Debug\net7.0\FYP.VehicleTracking.Console.AssemblyInfo.cs
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.Console\obj\Debug\net7.0\FYP.VehicleTracking.Console.csproj.CoreCompileInputs.cache
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.Console\obj\Debug\net7.0\FYP.VehicleTracking.Console.dll
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.Console\obj\Debug\net7.0\refint\FYP.VehicleTracking.Console.dll
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.Console\obj\Debug\net7.0\FYP.VehicleTracking.Console.pdb
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.Console\obj\Debug\net7.0\FYP.VehicleTracking.Console.genruntimeconfig.cache
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.Console\obj\Debug\net7.0\ref\FYP.VehicleTracking.Console.dll
