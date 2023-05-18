@@ -1,0 +1,10 @@
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.Schema\bin\Debug\FYP.VehicleTracking.Schema.dacpac
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.Schema\bin\Debug\FYP.VehicleTracking.Schema.dll
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.Schema\bin\Debug\FYP.VehicleTracking.Schema.pdb
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.Schema\obj\Debug\FYP.VehicleTracking.Schema.sqlproj.AssemblyReference.cache
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.Schema\obj\Debug\Model.xml
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.Schema\obj\Debug\refactor.xml
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.Schema\obj\Debug\postdeploy.sql
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.Schema\obj\Debug\predeploy.sql
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.Schema\obj\Debug\FYP.VehicleTracking.Schema.dll
+C:\Users\DELL\source\repos\NewRepo\100daysofCode\FYP.VehicleTracking\FYP.VehicleTracking.Schema\obj\Debug\FYP.VehicleTracking.Schema.pdb

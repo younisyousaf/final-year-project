@@ -46,18 +46,40 @@ class _SignupState extends State<Signup> {
               SizedBox(
                 width: 400,
                 child: Container(
+
+                  margin: EdgeInsets.only(
+                    left: 15,
+                    right: 15,
+                  ),
+
                   margin: EdgeInsets.only(left: 15),
+
                   child: TextField(
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Color.fromRGBO(237, 236, 236, 1),
                       // hintText: "Enter Your Username",
                       enabledBorder: OutlineInputBorder(
+
+                        borderSide: BorderSide(
+                          color: Color.fromRGBO(237, 236, 236, 1),
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          width: 2,
+                          color: Color.fromRGBO(237, 236, 236, 1),
+                        ),
+                      ),
+
                           borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
                             width: 2,
                             color: Color.fromRGBO(237, 236, 236, 1),
                           )),
+
                     ),
                   ),
                 ),
@@ -79,18 +101,40 @@ class _SignupState extends State<Signup> {
               SizedBox(
                 width: 400,
                 child: Container(
+
+                  margin: EdgeInsets.only(
+                    left: 15,
+                    right: 15,
+                  ),
+
                   margin: EdgeInsets.only(left: 15),
+
                   child: TextField(
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Color.fromRGBO(237, 236, 236, 1),
                       // hintText: "Enter Your Email",
                       enabledBorder: OutlineInputBorder(
+
+                        borderSide: BorderSide(
+                          color: Color.fromRGBO(237, 236, 236, 1),
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          width: 2,
+                          color: Color.fromRGBO(237, 236, 236, 1),
+                        ),
+                      ),
+
                           borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
                             width: 2,
                             color: Color.fromRGBO(237, 236, 236, 1),
                           )),
+
                     ),
                   ),
                 ),
@@ -112,7 +156,14 @@ class _SignupState extends State<Signup> {
               SizedBox(
                 width: 400,
                 child: Container(
+
+                  margin: EdgeInsets.only(
+                    left: 15,
+                    right: 15,
+                  ),
+
                   margin: EdgeInsets.only(left: 15),
+
                   child: TextField(
                     obscureText: true,
                     decoration: InputDecoration(
@@ -120,6 +171,14 @@ class _SignupState extends State<Signup> {
                       fillColor: Color.fromRGBO(237, 236, 236, 1),
                       // hintText: "Enter Your Password",
                       enabledBorder: OutlineInputBorder(
+
+                        borderSide: BorderSide(
+                          color: Color.fromRGBO(237, 236, 236, 1),
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
                           width: 2,
@@ -136,7 +195,14 @@ class _SignupState extends State<Signup> {
               Container(
                 width: 385,
                 height: 60,
+
+                margin: EdgeInsets.only(
+                  left: 15,
+                  right: 15,
+                ),
+
                 margin: EdgeInsets.only(left: 15),
+
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromARGB(255, 27, 187, 1),
@@ -230,7 +296,11 @@ class _SignupState extends State<Signup> {
                             margin:
                                 EdgeInsets.only(bottom: 10, top: 10, left: 10),
                             child:
+
+                                Image.asset('assets/images/Google_logo.png')),
+
                                 Image.asset('assets/images/Google-logo.png')),
+
                       ],
                     ),
                   ),

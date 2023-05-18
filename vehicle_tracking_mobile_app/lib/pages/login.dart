@@ -1,7 +1,11 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
+
+import 'package:vehicle_tracking_mobile_app/location/car-location.dart';
+
 import 'package:vehicle_tracking_mobile_app/pages/home-page.dart';
+
 import 'signup.dart';
 
 class Login extends StatefulWidget {
@@ -47,13 +51,27 @@ class _LoginState extends State<Login> {
               SizedBox(
                 width: 400,
                 child: Container(
+
+                  margin: EdgeInsets.only(
+                    left: 15,
+                    right: 15,
+                  ),
+
                   margin: EdgeInsets.only(left: 15),
+
                   child: TextField(
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Color.fromRGBO(237, 236, 236, 1),
                       // hintText: "Enter Your Email",
                       enabledBorder: OutlineInputBorder(
+
+                        borderSide: BorderSide(
+                          color: Color.fromRGBO(237, 236, 236, 1),
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
                           width: 2,
@@ -81,7 +99,14 @@ class _LoginState extends State<Login> {
               SizedBox(
                 width: 400,
                 child: Container(
+
+                  margin: EdgeInsets.only(
+                    left: 15,
+                    right: 15,
+                  ),
+
                   margin: EdgeInsets.only(left: 15),
+
                   child: TextField(
                     obscureText: true,
                     decoration: InputDecoration(
@@ -89,6 +114,14 @@ class _LoginState extends State<Login> {
                       fillColor: Color.fromRGBO(237, 236, 236, 1),
                       // hintText: "Enter Your Password",
                       enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          width: 2,
+                          color: Color.fromRGBO(237, 236, 236, 1),
+                        ),
+                      ),
+
+                      focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
                           width: 2,
@@ -105,7 +138,14 @@ class _LoginState extends State<Login> {
               Container(
                 width: 385,
                 height: 60,
+
+                margin: EdgeInsets.only(
+                  left: 15,
+                  right: 15,
+                ),
+
                 margin: EdgeInsets.only(left: 15),
+
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromARGB(255, 27, 187, 1),
@@ -122,7 +162,11 @@ class _LoginState extends State<Login> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
+
+                        builder: (context) => CarLocation(),
+
                         builder: (context) => HomePage(),
+
                       ),
                     );
                   },
@@ -133,11 +177,22 @@ class _LoginState extends State<Login> {
                 children: [
                   TextButton(
                     onPressed: () {},
+
+                    child: Container(
+                      margin: EdgeInsets.only(right: 10),
+                      child: Text(
+                        "Forgot Password?",
+                        style: TextStyle(
+                          color: Colors.black87,
+                          fontSize: 17,
+                        ),
+
                     child: Text(
                       "Forgot Password?",
                       style: TextStyle(
                         color: Colors.black87,
                         fontSize: 17,
+
                       ),
                     ),
                   ),
@@ -213,7 +268,11 @@ class _LoginState extends State<Login> {
                             margin:
                                 EdgeInsets.only(bottom: 10, top: 10, left: 10),
                             child:
+
+                                Image.asset('assets/images/Google_logo.png')),
+
                                 Image.asset('assets/images/Google-logo.png')),
+
                       ],
                     ),
                   ),

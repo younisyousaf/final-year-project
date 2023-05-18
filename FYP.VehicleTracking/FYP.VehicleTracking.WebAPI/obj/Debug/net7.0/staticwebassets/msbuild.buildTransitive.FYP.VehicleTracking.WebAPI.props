@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\FYP.VehicleTracking.WebAPI.props" />
+</Project>

@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "AoydbhKSEhEusapd4s61kzk8z5axpidfqT5H8834m10=",
+  "Source": "FYP.VehicleTracking.WebAPI",
+  "BasePath": "_content/FYP.VehicleTracking.WebAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
