@@ -10,16 +10,28 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
+
               margin: EdgeInsets.only(left: 220, bottom: 20),
               height: 150,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.elliptical(255, 260),
                   bottomRight: Radius.elliptical(80, 10),
+
+              margin: EdgeInsets.only(left: 255, bottom: 20),
+              height: 145,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(135),
+
                 ),
                 color: Color.fromARGB(255, 27, 187, 1),
               ),
