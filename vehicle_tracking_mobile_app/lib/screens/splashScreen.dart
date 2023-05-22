@@ -9,17 +9,17 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SingleChildScrollView(
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              margin: EdgeInsets.only(left: 220, bottom: 20),
+              margin: EdgeInsets.only(left: 240, bottom: 20),
               height: 150,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.elliptical(255, 260),
-                  bottomRight: Radius.elliptical(80, 15),
+                  bottomLeft: Radius.circular(220),
+                  bottomRight: Radius.elliptical(60, 5),
                 ),
                 color: Color.fromARGB(255, 27, 187, 1),
               ),
@@ -60,34 +60,37 @@ class SplashScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
-              width: 370,
-              height: 60,
-              child: Directionality(
-                textDirection: TextDirection.rtl,
-                child: ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 27, 187, 1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10), // <-- Radius
-                    ),
-                  ),
-                  label: Text(
-                    "Get Started",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  icon: Icon(Icons.arrow_outward),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Signup(),
+            Container(
+              margin: EdgeInsets.only(left: 15, right: 15),
+              child: SizedBox(
+                width: 370,
+                height: 60,
+                child: Directionality(
+                  textDirection: TextDirection.rtl,
+                  child: ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromARGB(255, 27, 187, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10), // <-- Radius
                       ),
-                    );
-                  },
+                    ),
+                    label: Text(
+                      "Get Started",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    icon: Icon(Icons.arrow_outward),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Signup(),
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
