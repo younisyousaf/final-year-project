@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+    <PropertyGroup>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Sentry.AspNetCore" Version="3.30.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.5.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\VTrack.Api.Model\VTrack.Api.Model.csproj" />
+        <ProjectReference Include="..\VTrack.Api.Services\VTrack.Api.Services.csproj" />
+        <ProjectReference Include="..\VTrack.Shared.Services\VTrack.Shared.Services.csproj" />
+        <ProjectReference Include="..\VTrack.DataAccess\VTrack.DataAccess.csproj" />
+        <ProjectReference Include="..\VTrack.Shared.Library\VTrack.Shared.Library.csproj" />
+    </ItemGroup>
+
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+        <Exec Command="dotnet tool restore" />
+
+    </Target>
+</Project>

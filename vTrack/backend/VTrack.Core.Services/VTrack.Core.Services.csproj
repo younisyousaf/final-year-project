@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <ProjectReference Include="..\VTrack.Core.Model\VTrack.Core.Model.csproj" />
+        <ProjectReference Include="..\VTrack.DataAccess.Services\VTrack.DataAccess.Services.csproj" />
+        <ProjectReference Include="..\VTrack.Shared.Library\VTrack.Shared.Library.csproj" />
+    </ItemGroup>
+</Project>

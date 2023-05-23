@@ -1,0 +1,209 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+    </PropertyGroup>
+    <ItemGroup>
+      <Compile Remove="Protocols\Alematics\**" />
+      <Compile Remove="Protocols\Amwell\**" />
+      <Compile Remove="Protocols\Arknav\**" />
+      <Compile Remove="Protocols\Arusnavi\**" />
+      <Compile Remove="Protocols\ATrack\**" />
+      <Compile Remove="Protocols\Autofon\**" />
+      <Compile Remove="Protocols\BlueIdea\**" />
+      <Compile Remove="Protocols\Bofan\**" />
+      <Compile Remove="Protocols\CanTrack\**" />
+      <Compile Remove="Protocols\Carscop\**" />
+      <Compile Remove="Protocols\CarTrackGPS\**" />
+      <Compile Remove="Protocols\Coban\**" />
+      <Compile Remove="Protocols\Concox\**" />
+      <Compile Remove="Protocols\Eelink\**" />
+      <Compile Remove="Protocols\Eview\**" />
+      <Compile Remove="Protocols\Fifotrack\**" />
+      <Compile Remove="Protocols\Freedom\**" />
+      <Compile Remove="Protocols\Galileosky\**" />
+      <Compile Remove="Protocols\GlobalSat\**" />
+      <Compile Remove="Protocols\GoPass\**" />
+      <Compile Remove="Protocols\Gosafe\**" />
+      <Compile Remove="Protocols\Gotop\**" />
+      <Compile Remove="Protocols\GPSMarker\**" />
+      <Compile Remove="Protocols\Haicom\**" />
+      <Compile Remove="Protocols\iCarGPS\**" />
+      <Compile Remove="Protocols\iStartek\**" />
+      <Compile Remove="Protocols\iTracGPS\**" />
+      <Compile Remove="Protocols\Jointech\**" />
+      <Compile Remove="Protocols\KeSon\**" />
+      <Compile Remove="Protocols\KingSword\**" />
+      <Compile Remove="Protocols\Laipac\**" />
+      <Compile Remove="Protocols\LKGPS\**" />
+      <Compile Remove="Protocols\ManPower\**" />
+      <Compile Remove="Protocols\Megastek\**" />
+      <Compile Remove="Protocols\Meiligao\**" />
+      <Compile Remove="Protocols\Meitrack\**" />
+      <Compile Remove="Protocols\Navtelecom\**" />
+      <Compile Remove="Protocols\Neomatica\**" />
+      <Compile Remove="Protocols\Pretrace\**" />
+      <Compile Remove="Protocols\Queclink\**" />
+      <Compile Remove="Protocols\ReachFar\**" />
+      <Compile Remove="Protocols\Ruptela\**" />
+      <Compile Remove="Protocols\Sanav\**" />
+      <Compile Remove="Protocols\Satellite\**" />
+      <Compile Remove="Protocols\SinoTrack\**" />
+      <Compile Remove="Protocols\Skypatrol\**" />
+      <Compile Remove="Protocols\Smartrack\**" />
+      <Compile Remove="Protocols\StarLink\**" />
+      <Compile Remove="Protocols\Suntech\**" />
+      <Compile Remove="Protocols\Teltonika\**" />
+      <Compile Remove="Protocols\TkStar\**" />
+      <Compile Remove="Protocols\Topfly\**" />
+      <Compile Remove="Protocols\Totem\**" />
+      <Compile Remove="Protocols\Tzone\**" />
+      <Compile Remove="Protocols\VjoyCar\**" />
+      <Compile Remove="Protocols\VSun\**" />
+      <Compile Remove="Protocols\XeElectech\**" />
+      <Compile Remove="Protocols\Xexun\**" />
+      <Compile Remove="Protocols\Xirgo\**" />
+      <EmbeddedResource Remove="Protocols\Alematics\**" />
+      <EmbeddedResource Remove="Protocols\Amwell\**" />
+      <EmbeddedResource Remove="Protocols\Arknav\**" />
+      <EmbeddedResource Remove="Protocols\Arusnavi\**" />
+      <EmbeddedResource Remove="Protocols\ATrack\**" />
+      <EmbeddedResource Remove="Protocols\Autofon\**" />
+      <EmbeddedResource Remove="Protocols\BlueIdea\**" />
+      <EmbeddedResource Remove="Protocols\Bofan\**" />
+      <EmbeddedResource Remove="Protocols\CanTrack\**" />
+      <EmbeddedResource Remove="Protocols\Carscop\**" />
+      <EmbeddedResource Remove="Protocols\CarTrackGPS\**" />
+      <EmbeddedResource Remove="Protocols\Coban\**" />
+      <EmbeddedResource Remove="Protocols\Concox\**" />
+      <EmbeddedResource Remove="Protocols\Eelink\**" />
+      <EmbeddedResource Remove="Protocols\Eview\**" />
+      <EmbeddedResource Remove="Protocols\Fifotrack\**" />
+      <EmbeddedResource Remove="Protocols\Freedom\**" />
+      <EmbeddedResource Remove="Protocols\Galileosky\**" />
+      <EmbeddedResource Remove="Protocols\GlobalSat\**" />
+      <EmbeddedResource Remove="Protocols\GoPass\**" />
+      <EmbeddedResource Remove="Protocols\Gosafe\**" />
+      <EmbeddedResource Remove="Protocols\Gotop\**" />
+      <EmbeddedResource Remove="Protocols\GPSMarker\**" />
+      <EmbeddedResource Remove="Protocols\Haicom\**" />
+      <EmbeddedResource Remove="Protocols\iCarGPS\**" />
+      <EmbeddedResource Remove="Protocols\iStartek\**" />
+      <EmbeddedResource Remove="Protocols\iTracGPS\**" />
+      <EmbeddedResource Remove="Protocols\Jointech\**" />
+      <EmbeddedResource Remove="Protocols\KeSon\**" />
+      <EmbeddedResource Remove="Protocols\KingSword\**" />
+      <EmbeddedResource Remove="Protocols\Laipac\**" />
+      <EmbeddedResource Remove="Protocols\LKGPS\**" />
+      <EmbeddedResource Remove="Protocols\ManPower\**" />
+      <EmbeddedResource Remove="Protocols\Megastek\**" />
+      <EmbeddedResource Remove="Protocols\Meiligao\**" />
+      <EmbeddedResource Remove="Protocols\Meitrack\**" />
+      <EmbeddedResource Remove="Protocols\Navtelecom\**" />
+      <EmbeddedResource Remove="Protocols\Neomatica\**" />
+      <EmbeddedResource Remove="Protocols\Pretrace\**" />
+      <EmbeddedResource Remove="Protocols\Queclink\**" />
+      <EmbeddedResource Remove="Protocols\ReachFar\**" />
+      <EmbeddedResource Remove="Protocols\Ruptela\**" />
+      <EmbeddedResource Remove="Protocols\Sanav\**" />
+      <EmbeddedResource Remove="Protocols\Satellite\**" />
+      <EmbeddedResource Remove="Protocols\SinoTrack\**" />
+      <EmbeddedResource Remove="Protocols\Skypatrol\**" />
+      <EmbeddedResource Remove="Protocols\Smartrack\**" />
+      <EmbeddedResource Remove="Protocols\StarLink\**" />
+      <EmbeddedResource Remove="Protocols\Suntech\**" />
+      <EmbeddedResource Remove="Protocols\Teltonika\**" />
+      <EmbeddedResource Remove="Protocols\TkStar\**" />
+      <EmbeddedResource Remove="Protocols\Topfly\**" />
+      <EmbeddedResource Remove="Protocols\Totem\**" />
+      <EmbeddedResource Remove="Protocols\Tzone\**" />
+      <EmbeddedResource Remove="Protocols\VjoyCar\**" />
+      <EmbeddedResource Remove="Protocols\VSun\**" />
+      <EmbeddedResource Remove="Protocols\XeElectech\**" />
+      <EmbeddedResource Remove="Protocols\Xexun\**" />
+      <EmbeddedResource Remove="Protocols\Xirgo\**" />
+      <None Remove="Protocols\Alematics\**" />
+      <None Remove="Protocols\Amwell\**" />
+      <None Remove="Protocols\Arknav\**" />
+      <None Remove="Protocols\Arusnavi\**" />
+      <None Remove="Protocols\ATrack\**" />
+      <None Remove="Protocols\Autofon\**" />
+      <None Remove="Protocols\BlueIdea\**" />
+      <None Remove="Protocols\Bofan\**" />
+      <None Remove="Protocols\CanTrack\**" />
+      <None Remove="Protocols\Carscop\**" />
+      <None Remove="Protocols\CarTrackGPS\**" />
+      <None Remove="Protocols\Coban\**" />
+      <None Remove="Protocols\Concox\**" />
+      <None Remove="Protocols\Eelink\**" />
+      <None Remove="Protocols\Eview\**" />
+      <None Remove="Protocols\Fifotrack\**" />
+      <None Remove="Protocols\Freedom\**" />
+      <None Remove="Protocols\Galileosky\**" />
+      <None Remove="Protocols\GlobalSat\**" />
+      <None Remove="Protocols\GoPass\**" />
+      <None Remove="Protocols\Gosafe\**" />
+      <None Remove="Protocols\Gotop\**" />
+      <None Remove="Protocols\GPSMarker\**" />
+      <None Remove="Protocols\Haicom\**" />
+      <None Remove="Protocols\iCarGPS\**" />
+      <None Remove="Protocols\iStartek\**" />
+      <None Remove="Protocols\iTracGPS\**" />
+      <None Remove="Protocols\Jointech\**" />
+      <None Remove="Protocols\KeSon\**" />
+      <None Remove="Protocols\KingSword\**" />
+      <None Remove="Protocols\Laipac\**" />
+      <None Remove="Protocols\LKGPS\**" />
+      <None Remove="Protocols\ManPower\**" />
+      <None Remove="Protocols\Megastek\**" />
+      <None Remove="Protocols\Meiligao\**" />
+      <None Remove="Protocols\Meitrack\**" />
+      <None Remove="Protocols\Navtelecom\**" />
+      <None Remove="Protocols\Neomatica\**" />
+      <None Remove="Protocols\Pretrace\**" />
+      <None Remove="Protocols\Queclink\**" />
+      <None Remove="Protocols\ReachFar\**" />
+      <None Remove="Protocols\Ruptela\**" />
+      <None Remove="Protocols\Sanav\**" />
+      <None Remove="Protocols\Satellite\**" />
+      <None Remove="Protocols\SinoTrack\**" />
+      <None Remove="Protocols\Skypatrol\**" />
+      <None Remove="Protocols\Smartrack\**" />
+      <None Remove="Protocols\StarLink\**" />
+      <None Remove="Protocols\Suntech\**" />
+      <None Remove="Protocols\Teltonika\**" />
+      <None Remove="Protocols\TkStar\**" />
+      <None Remove="Protocols\Topfly\**" />
+      <None Remove="Protocols\Totem\**" />
+      <None Remove="Protocols\Tzone\**" />
+      <None Remove="Protocols\VjoyCar\**" />
+      <None Remove="Protocols\VSun\**" />
+      <None Remove="Protocols\XeElectech\**" />
+      <None Remove="Protocols\Xexun\**" />
+      <None Remove="Protocols\Xirgo\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+        <PackageReference Include="Sentry.AspNetCore" Version="3.30.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\VTrack.Shared.Services\VTrack.Shared.Services.csproj" />
+        <ProjectReference Include="..\VTrack.DataAccess.Services\VTrack.DataAccess.Services.csproj" />
+        <ProjectReference Include="..\VTrack.DataAccess\VTrack.DataAccess.csproj" />
+        <ProjectReference Include="..\VTrack.Shared.Library\VTrack.Shared.Library.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="appsettings.Development.json">
+            <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        </Content>
+        <Content Include="appsettings.json">
+            <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        </Content>
+    </ItemGroup>
+</Project>

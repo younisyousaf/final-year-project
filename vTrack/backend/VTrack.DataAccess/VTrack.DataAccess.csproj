@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <ProjectReference Include="..\VTrack.DataAccess.Model\VTrack.DataAccess.Model.csproj" />
+        <ProjectReference Include="..\VTrack.Shared.Library\VTrack.Shared.Library.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MongoDB.Bson" Version="2.19.1" />
+        <PackageReference Include="MongoDB.Driver" Version="2.19.1" />
+    </ItemGroup>
+</Project>
