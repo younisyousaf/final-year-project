@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\VTrack.Shared.Services\VTrack.Shared.Services.csproj" />
+        <ProjectReference Include="..\VTrack.Core.Services\VTrack.Core.Services.csproj" />
+    </ItemGroup>
+</Project>

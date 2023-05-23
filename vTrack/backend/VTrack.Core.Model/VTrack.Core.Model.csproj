@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <ProjectReference Include="..\VTrack.DataAccess.Model\VTrack.DataAccess.Model.csproj" />
+    </ItemGroup>
+</Project>

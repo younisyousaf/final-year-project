@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+      <RootNamespace>VTrack.Common</RootNamespace>
+    </PropertyGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\VTrack.DataAccess.Services\VTrack.DataAccess.Services.csproj" />
+        <ProjectReference Include="..\VTrack.DataAccess\VTrack.DataAccess.csproj" />
+        <ProjectReference Include="..\VTrack.Shared.Library\VTrack.Shared.Library.csproj" />
+    </ItemGroup>
+</Project>

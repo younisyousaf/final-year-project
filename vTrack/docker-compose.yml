@@ -1,0 +1,47 @@
+services:
+  web:
+    image: ghcr.io/navtrack/navtrack/web:latest
+    networks:
+      - navtrack
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    environment:
+      - "ASPNETCORE_URLS=http://*:3000"
+
+  api:
+    image: ghcr.io/navtrack/navtrack/api:latest
+    networks:
+      - navtrack
+    ports:
+      - 3001:3001
+    restart: unless-stopped
+    environment:
+      - "ASPNETCORE_URLS=http://*:3001"
+      - "MongoOptions__Database=navtrack"
+      - "MongoOptions__ConnectionString=mongodb://navtrack:navtrack@database/?authSource=admin"
+
+  listener:
+    image: ghcr.io/navtrack/navtrack/listener:latest
+    networks:
+      - navtrack
+    ports:
+      - "7001-7100:7001-7100"
+    restart: unless-stopped
+
+  database:
+    image: mongo
+    restart: unless-stopped
+    networks:
+      - navtrack
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: navtrack
+      MONGO_INITDB_ROOT_PASSWORD: navtrack
+    volumes:
+      - navtrack:/data/db
+
+volumes:
+  navtrack:
+
+networks:
+  navtrack:
