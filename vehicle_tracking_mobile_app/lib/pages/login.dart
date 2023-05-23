@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:vehicle_tracking_mobile_app/location/location.dart';
-import 'package:vehicle_tracking_mobile_app/main.dart';
 // import 'package:vehicle_tracking_mobile_app/location/car-location.dart';
 import 'signup.dart';
 
