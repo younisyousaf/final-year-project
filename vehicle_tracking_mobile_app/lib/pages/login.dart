@@ -1,8 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:vehicle_tracking_mobile_app/location/location.dart';
-// import 'package:vehicle_tracking_mobile_app/location/car-location.dart';
+import 'package:vehicle_tracking_mobile_app/pages/start_tracking.dart';
 import 'signup.dart';
 
 class Login extends StatefulWidget {
@@ -145,7 +144,7 @@ class _LoginState extends State<Login> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => CarLocation(),
+                        builder: (context) => StartTracking(),
                       ),
                     );
                   },
