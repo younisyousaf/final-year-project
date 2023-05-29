@@ -14,12 +14,12 @@ class SplashScreen extends StatelessWidget {
           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              margin: EdgeInsets.only(left: 240, bottom: 20),
-              height: 150,
+              margin: EdgeInsets.only(left: 220, bottom: 20),
+              height: 130,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(220),
-                  bottomRight: Radius.elliptical(60, 5),
+                  bottomRight: Radius.elliptical(70, 5),
                 ),
                 color: Color.fromARGB(255, 27, 187, 1),
               ),

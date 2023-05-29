@@ -37,12 +37,12 @@ class _StartTrackingState extends State<StartTracking> {
     if (status != permission_handler.PermissionStatus.granted) {
       print("Location Permission is not Granted!, Turn on Your Location");
     } else {
-      location.onLocationChanged.listen((loc.LocationData? locationData) {
-        setState(() {
-          currentLocation = locationData;
-          sendDataToServer();
-        });
-      });
+      // location.onLocationChanged.listen((loc.LocationData? locationData) {
+      //   setState(() {
+      //     currentLocation = locationData;
+      //     sendDataToServer();
+      //   });
+      // });
     }
   }
 
@@ -54,7 +54,6 @@ class _StartTrackingState extends State<StartTracking> {
 
     try {
       if (socket == null || socket?.write == null) {
-        // Establish a new TCP connection
         socket = await Socket.connect(serverIP, int.parse(serverPort));
       }
 
@@ -71,10 +70,8 @@ class _StartTrackingState extends State<StartTracking> {
 
       print('Sending data to server: $serverIP:$serverPort, Data: $dataString');
 
-      // Send data to the server
       socket?.write(dataString);
 
-      // Optionally, wait for a response from the server
       final response = await socket
           ?.transform(utf8.decoder as StreamTransformer<Uint8List, dynamic>)
           .join();

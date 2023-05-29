@@ -97,11 +97,18 @@ class _CarLocationState extends State<CarLocation> {
       final response = await socket
           ?.transform(utf8.decoder as StreamTransformer<Uint8List, dynamic>)
           .join();
-      print('Server response: $response');
+
+      if (response != null) {
+        print('Server response: $response');
+        print("Data is Sent to the server");
+      } else {
+        print("Data transmission failed");
+      }
     } catch (e) {
       print('Error connecting to the server: $e');
       socket?.close();
       socket = null;
+      print("Data transmission failed");
     }
   }
 
@@ -109,7 +116,7 @@ class _CarLocationState extends State<CarLocation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text("Vehicle Tracking")),
+        title: const Center(child: Text("Vehicle Location\t\t")),
         backgroundColor: const Color.fromARGB(255, 27, 187, 1),
         leading: null,
       ),
@@ -120,7 +127,7 @@ class _CarLocationState extends State<CarLocation> {
               zoomGesturesEnabled: true,
               initialCameraPosition: const CameraPosition(
                 target: LatLng(27.7089427, 85.3086209),
-                zoom: 15.0,
+                zoom: 14.0,
               ),
               mapType: MapType.normal,
               onMapCreated: (controller) {
