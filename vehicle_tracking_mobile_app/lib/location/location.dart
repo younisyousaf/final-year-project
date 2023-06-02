@@ -14,11 +14,13 @@ import 'package:permission_handler/permission_handler.dart' as perm;
 class CarLocation extends StatefulWidget {
   final String serverIP;
   final String serverPort;
+  final String apiURL;
 
   const CarLocation({
     Key? key,
     required this.serverIP,
     required this.serverPort,
+    required this.apiURL,
   }) : super(key: key);
 
   @override
@@ -82,8 +84,11 @@ class _CarLocationState extends State<CarLocation> {
     try {
       if (socket == null || socket?.write == null) {
         // Establish a new TCP connection
-        socket =
-            await Socket.connect(widget.serverIP, int.parse(widget.serverPort));
+        socket = await Socket.connect(
+          widget.serverIP,
+          int.parse(widget.serverPort),
+          sourceAddress: widget.apiURL,
+        );
       }
 
       final locationData = currentLocation!;
@@ -125,6 +130,7 @@ class _CarLocationState extends State<CarLocation> {
           Expanded(
             child: GoogleMap(
               zoomGesturesEnabled: true,
+              myLocationEnabled: true,
               initialCameraPosition: const CameraPosition(
                 target: LatLng(27.7089427, 85.3086209),
                 zoom: 14.0,

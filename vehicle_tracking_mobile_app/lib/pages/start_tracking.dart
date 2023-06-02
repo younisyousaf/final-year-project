@@ -20,6 +20,7 @@ class StartTracking extends StatefulWidget {
 class _StartTrackingState extends State<StartTracking> {
   String serverIP = '';
   String serverPort = '';
+  String apiURL = '';
 
   loc.LocationData? currentLocation;
   loc.Location location = loc.Location();
@@ -106,11 +107,37 @@ class _StartTrackingState extends State<StartTracking> {
                       return Builder(
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: const Text('Server Setting'),
+                            title: const Text(
+                              'Server Setting',
+                              textAlign: TextAlign.center,
+                            ),
                             contentPadding: const EdgeInsets.all(16.0),
                             content: SingleChildScrollView(
                               child: ListBody(
                                 children: <Widget>[
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Expanded(
+                                        child: TextFormField(
+                                          onChanged: (value) {
+                                            setState(() {
+                                              apiURL = value;
+                                            });
+                                          },
+                                          decoration: const InputDecoration(
+                                            labelText: 'API URL',
+                                            labelStyle: TextStyle(
+                                              color: Color.fromARGB(
+                                                  255, 27, 187, 1),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 16),
                                   Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
@@ -157,6 +184,10 @@ class _StartTrackingState extends State<StartTracking> {
                                     ],
                                   ),
                                   ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          const Color.fromARGB(255, 27, 187, 1),
+                                    ),
                                     onPressed: () {
                                       // Perform any validation or saving logic for server IP and Port
                                       Navigator.of(dialogContext).pop();
@@ -201,6 +232,7 @@ class _StartTrackingState extends State<StartTracking> {
                       builder: (context) => const CarLocation(
                         serverIP: '',
                         serverPort: '',
+                        apiURL: '',
                       ),
                     ),
                   );

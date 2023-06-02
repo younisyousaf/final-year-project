@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
-import 'package:vehicle_tracking_mobile_app/pages/signup.dart';
+import 'package:vehicle_tracking_mobile_app/pages/login.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -86,7 +86,7 @@ class SplashScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Signup(),
+                          builder: (context) => Login(),
                         ),
                       );
                     },
