@@ -1,10 +1,10 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unused_local_variable, avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:vehicle_tracking_mobile_app/pages/start_tracking.dart';
-import 'signup.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import 'package:vehicle_tracking_mobile_app/pages/start_tracking.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -193,6 +193,15 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   onPressed: _handleLogin,
+                  // () {
+
+                  //   Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //       builder: (context) => StartTracking(),
+                  //     ),
+                  //   );
+                  // },
                   child: Text(
                     "Login",
                     textAlign: TextAlign.center,
@@ -339,39 +348,39 @@ class _LoginState extends State<Login> {
                   ),
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(top: 30),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Don't Have an Account?",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Signup(),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        "Signup",
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 27, 187, 1),
-                            fontSize: 20,
-                            fontWeight: FontWeight.w900),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              // Container(
+              //   margin: EdgeInsets.only(top: 30),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     children: [
+              //       Text(
+              //         "Don't Have an Account?",
+              //         style: TextStyle(
+              //           fontSize: 20,
+              //           color: Colors.black,
+              //           fontWeight: FontWeight.w500,
+              //         ),
+              //       ),
+              //       TextButton(
+              //         onPressed: () {
+              //           Navigator.push(
+              //             context,
+              //             MaterialPageRoute(
+              //               builder: (context) => Signup(),
+              //             ),
+              //           );
+              //         },
+              //         child: Text(
+              //           "Signup",
+              //           style: TextStyle(
+              //               color: Color.fromARGB(255, 27, 187, 1),
+              //               fontSize: 20,
+              //               fontWeight: FontWeight.w900),
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
             ],
           ),
         ],
