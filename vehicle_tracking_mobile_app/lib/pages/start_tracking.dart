@@ -1,8 +1,4 @@
-
-// ignore_for_file: prefer_const_declarations, avoid_print, use_build_context_synchronously
-
 // ignore_for_file: prefer_const_declarations, avoid_print, library_private_types_in_public_api
-
 
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -112,14 +108,6 @@ class StartTracking extends StatefulWidget {
 }
 
 class _StartTrackingState extends State<StartTracking> {
-
-  String serverIP = '';
-  String serverPort = '';
-
-  loc.LocationData? currentLocation;
-  loc.Location location = loc.Location();
-  Socket? socket;
-
   final _storage = const FlutterSecureStorage();
   late Timer _timer;
   late String _serverIP;
@@ -127,31 +115,10 @@ class _StartTrackingState extends State<StartTracking> {
   late IO.Socket _socket;
   bool isTracking = false;
 
-
   @override
   void initState() {
     super.initState();
   }
-
-
-  Future<void> requestLocationPermission() async {
-    final permission_handler.PermissionStatus status =
-        await permission_handler.Permission.location.request();
-    if (status != permission_handler.PermissionStatus.granted) {
-      print("Location Permission is not Granted!, Turn on Your Location");
-    } else {
-      location.onLocationChanged.listen((loc.LocationData? locationData) {
-        setState(() {
-          currentLocation = locationData;
-        });
-      });
-    }
-  }
-
-  Future<void> sendDataToServer(String ip, String port, String data) async {
-    try {
-      if (socket == null || socket?.write == null) {
-        socket = await Socket.connect(ip, int.parse(port));
 
   @override
   void dispose() {
@@ -202,14 +169,10 @@ class _StartTrackingState extends State<StartTracking> {
       } else {
         //Note: Web view will use hardcoded device IMEI
         identifier = '356331110282877';
-
       }
     } catch (e) {
       print('Error retrieving device identifier: $e');
     }
-
-
-      socket?.write(data);
 
     return identifier;
   }
@@ -237,7 +200,6 @@ class _StartTrackingState extends State<StartTracking> {
       final message =
           '$imei,$dateTime,$latitude,$longitude,$speed,$heading,$altitude,$satellites';
 
-
       try {
         _socket = IO.io('http://$_serverIP:$_serverPort', <String, dynamic>{
           'transports': ['websocket'],
@@ -246,51 +208,12 @@ class _StartTrackingState extends State<StartTracking> {
           _socket.emit('message', message);
         });
 
-
-  Future<void> startTracking() async {
-    if (serverIP.isEmpty || serverPort.isEmpty) {
-      print('Please enter server IP and Port');
-      return;
-    }
-
-    final imei = '356331110282877';
-    final dateTime = DateTime.now().toString();
-    final latitude = currentLocation?.latitude ?? 44.82398238;
-    final longitude = currentLocation?.longitude ?? 23.472798279;
-    final speed = currentLocation?.speed ?? 12.0;
-    final heading = currentLocation?.heading ?? 34.48983;
-    final altitude = currentLocation?.altitude ?? 33.3939274927;
-
-    final dataString =
-        '$imei,$dateTime,$latitude,$longitude,$speed,$heading,$altitude';
-
-    print('Sending data to server: $serverIP:$serverPort, Data: $dataString');
-
-    await sendDataToServer(serverIP, serverPort, dataString);
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => CarLocation(
-          serverIP: serverIP,
-          serverPort: serverPort,
-        ),
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    socket?.close();
-    super.dispose();
-
         // Print the message for testing
         print('Message sent to server: $message');
       } catch (e) {
         print('Error sending message to server: $e');
       }
     }
-
   }
 
   @override
@@ -304,87 +227,7 @@ class _StartTrackingState extends State<StartTracking> {
             builder: (BuildContext context) {
               return IconButton(
                 onPressed: () {
-
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext dialogContext) {
-                      return Builder(
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: const Text(
-                              'Server Setting',
-                              textAlign: TextAlign.center,
-                            ),
-                            contentPadding: const EdgeInsets.all(16.0),
-                            content: SingleChildScrollView(
-                              child: ListBody(
-                                children: <Widget>[
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Expanded(
-                                        child: TextFormField(
-                                          onChanged: (value) {
-                                            setState(() {
-                                              serverIP = value;
-                                            });
-                                          },
-                                          decoration: const InputDecoration(
-                                            labelText: 'Server IP',
-                                            labelStyle: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 27, 187, 1),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 12),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Expanded(
-                                        child: TextFormField(
-                                          onChanged: (value) {
-                                            setState(() {
-                                              serverPort = value;
-                                            });
-                                          },
-                                          decoration: const InputDecoration(
-                                            labelText: 'Server Port',
-                                            labelStyle: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 27, 187, 1),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor:
-                                          const Color.fromARGB(255, 27, 187, 1),
-                                    ),
-                                    onPressed: () {
-                                      Navigator.of(dialogContext).pop();
-                                    },
-                                    child: const Text('Submit'),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                  );
-
                   openServerSettingsDialog(context);
-
                 },
                 icon: const Icon(Icons.settings),
                 iconSize: 35,
@@ -408,10 +251,6 @@ class _StartTrackingState extends State<StartTracking> {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: GestureDetector(
-
-                onTap: startTracking,
-                child: const CircleAvatar(
-
                 onTap: () {
                   if (isTracking) {
                     _stopTracking();
@@ -430,7 +269,6 @@ class _StartTrackingState extends State<StartTracking> {
                   // );
                 },
                 child: CircleAvatar(
-
                   radius: 60.0,
                   backgroundColor: Color.fromARGB(255, 27, 187, 1),
                   child: Text(
