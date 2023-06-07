@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_declarations, avoid_print
+// ignore_for_file: prefer_const_declarations, avoid_print, use_build_context_synchronously
 
 import 'dart:convert';
 import 'dart:io';
@@ -20,7 +20,6 @@ class StartTracking extends StatefulWidget {
 class _StartTrackingState extends State<StartTracking> {
   String serverIP = '';
   String serverPort = '';
-  String apiURL = '';
 
   loc.LocationData? currentLocation;
   loc.Location location = loc.Location();
@@ -38,40 +37,21 @@ class _StartTrackingState extends State<StartTracking> {
     if (status != permission_handler.PermissionStatus.granted) {
       print("Location Permission is not Granted!, Turn on Your Location");
     } else {
-      // location.onLocationChanged.listen((loc.LocationData? locationData) {
-      //   setState(() {
-      //     currentLocation = locationData;
-      //     sendDataToServer();
-      //   });
-      // });
+      location.onLocationChanged.listen((loc.LocationData? locationData) {
+        setState(() {
+          currentLocation = locationData;
+        });
+      });
     }
   }
 
-  Future<void> sendDataToServer() async {
-    if (serverIP.isEmpty || serverPort.isEmpty) {
-      print('Please enter server IP and Port');
-      return;
-    }
-
+  Future<void> sendDataToServer(String ip, String port, String data) async {
     try {
       if (socket == null || socket?.write == null) {
-        socket = await Socket.connect(serverIP, int.parse(serverPort));
+        socket = await Socket.connect(ip, int.parse(port));
       }
 
-      final imei = '356331110282877';
-      final dateTime = DateTime.now().toString();
-      final latitude = currentLocation?.latitude ?? 44.82398238;
-      final longitude = currentLocation?.longitude ?? 23.472798279;
-      final speed = currentLocation?.speed ?? 12.0;
-      final heading = currentLocation?.heading ?? 34.48983;
-      final altitude = currentLocation?.altitude ?? 33.3939274927;
-
-      final dataString =
-          '$imei,$dateTime,$latitude,$longitude,$speed,$heading,$altitude';
-
-      print('Sending data to server: $serverIP:$serverPort, Data: $dataString');
-
-      socket?.write(dataString);
+      socket?.write(data);
 
       final response = await socket
           ?.transform(utf8.decoder as StreamTransformer<Uint8List, dynamic>)
@@ -82,6 +62,38 @@ class _StartTrackingState extends State<StartTracking> {
       socket?.close();
       socket = null;
     }
+  }
+
+  Future<void> startTracking() async {
+    if (serverIP.isEmpty || serverPort.isEmpty) {
+      print('Please enter server IP and Port');
+      return;
+    }
+
+    final imei = '356331110282877';
+    final dateTime = DateTime.now().toString();
+    final latitude = currentLocation?.latitude ?? 44.82398238;
+    final longitude = currentLocation?.longitude ?? 23.472798279;
+    final speed = currentLocation?.speed ?? 12.0;
+    final heading = currentLocation?.heading ?? 34.48983;
+    final altitude = currentLocation?.altitude ?? 33.3939274927;
+
+    final dataString =
+        '$imei,$dateTime,$latitude,$longitude,$speed,$heading,$altitude';
+
+    print('Sending data to server: $serverIP:$serverPort, Data: $dataString');
+
+    await sendDataToServer(serverIP, serverPort, dataString);
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CarLocation(
+          serverIP: serverIP,
+          serverPort: serverPort,
+        ),
+      ),
+    );
   }
 
   @override
@@ -123,29 +135,6 @@ class _StartTrackingState extends State<StartTracking> {
                                         child: TextFormField(
                                           onChanged: (value) {
                                             setState(() {
-                                              apiURL = value;
-                                            });
-                                          },
-                                          decoration: const InputDecoration(
-                                            labelText: 'Server Address',
-                                            labelStyle: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 27, 187, 1),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 16),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Expanded(
-                                        child: TextFormField(
-                                          onChanged: (value) {
-                                            setState(() {
                                               serverIP = value;
                                             });
                                           },
@@ -160,7 +149,7 @@ class _StartTrackingState extends State<StartTracking> {
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(height: 16),
+                                  const SizedBox(height: 12),
                                   Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
@@ -189,7 +178,6 @@ class _StartTrackingState extends State<StartTracking> {
                                           const Color.fromARGB(255, 27, 187, 1),
                                     ),
                                     onPressed: () {
-                                      // Perform any validation or saving logic for server IP and Port
                                       Navigator.of(dialogContext).pop();
                                     },
                                     child: const Text('Submit'),
@@ -225,18 +213,7 @@ class _StartTrackingState extends State<StartTracking> {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const CarLocation(
-                        serverIP: '',
-                        serverPort: '',
-                        apiURL: '',
-                      ),
-                    ),
-                  );
-                },
+                onTap: startTracking,
                 child: const CircleAvatar(
                   radius: 60.0,
                   backgroundColor: Color.fromARGB(255, 27, 187, 1),
