@@ -127,7 +127,7 @@ class _StartTrackingState extends State<StartTracking> {
                                             });
                                           },
                                           decoration: const InputDecoration(
-                                            labelText: 'API URL',
+                                            labelText: 'Server Address',
                                             labelStyle: TextStyle(
                                               color: Color.fromARGB(
                                                   255, 27, 187, 1),
