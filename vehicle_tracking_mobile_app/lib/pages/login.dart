@@ -1,10 +1,13 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unused_local_variable, avoid_print
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unused_local_variable, avoid_print, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:vehicle_tracking_mobile_app/pages/start_tracking.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
+const FlutterSecureStorage secureStorage = FlutterSecureStorage();
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -17,54 +20,47 @@ class _LoginState extends State<Login> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  void _handleLogin() {
+  Future<void> loginWithPasswordGrantType() async {
     final username = _usernameController.text;
     final password = _passwordController.text;
 
-    // Call the login function here
-    login(username, password);
-  }
-
-  Future<void> login(String username, String password) async {
-    final url = Uri.parse('http://localhost:3001/connect/token');
-
-    // Create a Map with the login credentials
-    final data = {
-      'client_id': 'vtrack.mobile',
-      'grant_type': 'password',
-      'scope': 'offline_access IdentityServerApi openid',
-      'username': username,
-      'password': password
-    };
-
     try {
-      final response = await http.post(
-        url,
-        body: data,
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-      );
+      final Map<String, dynamic> body = {
+        'grant_type': 'password',
+        'username': username,
+        'password': password,
+        'client_id': 'vtrack.mobile',
+        'scope': 'offline_access IdentityServerApi openid',
+        // Include any additional parameters required by your server
+      };
+
+      final url = Uri.parse('http://localhost:3001/connect/token');
+      final response = await http.post(url, body: body, headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      });
 
       if (response.statusCode == 200) {
-        // Login successful
-        final responseData = jsonDecode(response.body);
-        // Do something with the response data
+        final Map<String, dynamic> jsonResponse = json.decode(response.body);
+        final accessToken = jsonResponse['access_token'];
+        await secureStorage.write(
+            key: 'refresh_token', value: jsonResponse['access_token']);
+        await secureStorage.write(
+            key: 'access_token', value: jsonResponse['refresh_token']);
 
-        // Example: Retrieve an access token
-        final accessToken = responseData['access_token'];
-
-        // Continue with authenticated requests using the access token
-        // ...
+        // Handle the access token or any other response data
+        print('Access Token: $accessToken');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => StartTracking(),
+          ),
+        );
       } else {
-        // Login failed
-        final errorMessage = response.body;
-        // Handle the error
+        // Handle the error response
+        print('Error logging in with password grant type');
       }
-    } catch (error) {
-      // Exception occurred during login
-      print('Login error: $error');
-      // Handle the exception
+    } catch (e) {
+      print('Error logging in with password grant type: $e');
     }
   }
 
@@ -107,26 +103,33 @@ class _LoginState extends State<Login> {
                     left: 15,
                     right: 15,
                   ),
-                  child: TextField(
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Color.fromRGBO(237, 236, 236, 1),
-                        // hintText: "Enter Your Email",
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromRGBO(237, 236, 236, 1),
-                          ),
-                          borderRadius: BorderRadius.circular(10),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Color.fromRGBO(237, 236, 236, 1),
+                      // hintText: "Enter Your Email",
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color.fromRGBO(237, 236, 236, 1),
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(
-                            width: 2,
-                            color: Color.fromRGBO(237, 236, 236, 1),
-                          ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          width: 2,
+                          color: Color.fromRGBO(237, 236, 236, 1),
                         ),
                       ),
-                      controller: _usernameController),
+                    ),
+                    controller: _usernameController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter the valid email';
+                      }
+                      return null;
+                    },
+                  ),
                 ),
               ),
               SizedBox(
@@ -150,7 +153,7 @@ class _LoginState extends State<Login> {
                     left: 15,
                     right: 15,
                   ),
-                  child: TextField(
+                  child: TextFormField(
                     obscureText: true,
                     decoration: InputDecoration(
                       filled: true,
@@ -172,6 +175,12 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     controller: _passwordController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter the password';
+                      }
+                      return null;
+                    },
                   ),
                 ),
               ),
@@ -192,15 +201,8 @@ class _LoginState extends State<Login> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  onPressed:
-                      // _handleLogin,
-                      () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => StartTracking(),
-                      ),
-                    );
+                  onPressed: () async {
+                    await loginWithPasswordGrantType();
                   },
                   child: Text(
                     "Login",
