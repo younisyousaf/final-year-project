@@ -192,16 +192,16 @@ class _LoginState extends State<Login> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  onPressed: _handleLogin,
-                  // () {
-
-                  //   Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => StartTracking(),
-                  //     ),
-                  //   );
-                  // },
+                  onPressed:
+                      // _handleLogin,
+                      () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => StartTracking(),
+                      ),
+                    );
+                  },
                   child: Text(
                     "Login",
                     textAlign: TextAlign.center,

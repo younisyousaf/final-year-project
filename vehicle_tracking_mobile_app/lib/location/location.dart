@@ -1,5 +1,5 @@
 // Add the 'dart:io' import statement
-// ignore_for_file: avoid_print, library_private_types_in_public_api
+// ignore_for_file: avoid_print, library_private_types_in_public_api, unused_import
 
 import 'dart:convert';
 import 'dart:io';
@@ -7,7 +7,8 @@ import 'dart:io';
 import 'dart:async';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart' as gm_flutter;
+import 'package:google_maps_flutter_web/google_maps_flutter_web.dart';
 import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart' as perm;
 
@@ -29,7 +30,7 @@ class CarLocation extends StatefulWidget {
 
 class _CarLocationState extends State<CarLocation> {
   GoogleMapController? mapController;
-  List<Marker> markers = [];
+  List<gm_flutter.Marker> markers = [];
   LocationData? currentLocation;
   Location location = Location();
   StreamSubscription<LocationData>? locationSubscription;
@@ -66,16 +67,17 @@ class _CarLocationState extends State<CarLocation> {
 
   void updateMarker() {
     if (currentLocation != null) {
-      final LatLng newPosition =
-          LatLng(currentLocation!.latitude!, currentLocation!.longitude!);
+      final gm_flutter.LatLng newPosition = gm_flutter.LatLng(
+          currentLocation!.latitude!, currentLocation!.longitude!);
       setState(() {
         markers = [
-          Marker(
-            markerId: const MarkerId('currentLocation'),
+          gm_flutter.Marker(
+            markerId: const gm_flutter.MarkerId('currentLocation'),
             position: newPosition,
           ),
         ];
-        mapController?.animateCamera(CameraUpdate.newLatLng(newPosition));
+        mapController
+            ?.moveCamera(gm_flutter.CameraUpdate.newLatLng(newPosition));
       });
     }
   }
@@ -128,20 +130,20 @@ class _CarLocationState extends State<CarLocation> {
       body: Column(
         children: [
           Expanded(
-            child: GoogleMap(
+            child: gm_flutter.GoogleMap(
               zoomGesturesEnabled: true,
               myLocationEnabled: true,
-              initialCameraPosition: const CameraPosition(
-                target: LatLng(27.7089427, 85.3086209),
+              initialCameraPosition: const gm_flutter.CameraPosition(
+                target: gm_flutter.LatLng(27.7089427, 85.3086209),
                 zoom: 14.0,
               ),
-              mapType: MapType.normal,
+              mapType: gm_flutter.MapType.normal,
               onMapCreated: (controller) {
                 setState(() {
-                  mapController = controller;
+                  mapController = controller as GoogleMapController?;
                 });
               },
-              markers: Set<Marker>.from(markers),
+              markers: Set<gm_flutter.Marker>.from(markers),
             ),
           ),
         ],
