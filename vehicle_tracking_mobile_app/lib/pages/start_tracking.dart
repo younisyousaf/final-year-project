@@ -8,6 +8,8 @@ import 'package:device_info/device_info.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 
+import '../location/location.dart';
+
 class ServerSettingsDialog extends StatefulWidget {
   const ServerSettingsDialog({super.key});
 
@@ -114,6 +116,7 @@ class _StartTrackingState extends State<StartTracking> {
   late String _serverPort;
   late IO.Socket _socket;
   bool isTracking = false;
+  bool isHovered = false;
 
   @override
   void initState() {
@@ -222,6 +225,7 @@ class _StartTrackingState extends State<StartTracking> {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 27, 187, 1),
         leading: null,
+        automaticallyImplyLeading: false,
         actions: [
           Builder(
             builder: (BuildContext context) {
@@ -233,6 +237,17 @@ class _StartTrackingState extends State<StartTracking> {
                 iconSize: 35,
               );
             },
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const LiveLocation(),
+                ),
+              );
+            },
+            child: const Text('Live!'),
           ),
         ],
       ),
@@ -249,39 +264,54 @@ class _StartTrackingState extends State<StartTracking> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: GestureDetector(
-                onTap: () {
-                  if (isTracking) {
-                    _stopTracking();
-                  } else {
-                    _startTracking();
-                  }
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => const CarLocation(
-                  //       serverIP: '',
-                  //       serverPort: '',
-                  //       apiURL: '',
-                  //     ),
-                  //   ),
-                  // );
-                },
-                child: CircleAvatar(
-                  radius: 60.0,
-                  backgroundColor: Color.fromARGB(255, 27, 187, 1),
-                  child: Text(
-                    isTracking ? 'Stop\nTracking' : 'Start\nTracking',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
+                padding: const EdgeInsets.all(20.0),
+                child: GestureDetector(
+                  onTap: () {
+                    if (isTracking) {
+                      _stopTracking();
+                    } else {
+                      _startTracking();
+                    }
+                  },
+                  onTapDown: (details) {
+                    setState(() {
+                      isHovered = true;
+                    });
+                  },
+                  onTapCancel: () {
+                    setState(() {
+                      isHovered = false;
+                    });
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: isHovered
+                          ? [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 5,
+                                blurRadius: 10,
+                                offset: const Offset(0, 3),
+                              ),
+                            ]
+                          : [],
+                    ),
+                    child: CircleAvatar(
+                      radius: 60.0,
+                      backgroundColor: Color.fromARGB(255, 27, 187, 1),
+                      child: Text(
+                        isTracking ? 'Stop' : 'Start',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-            ),
+                )),
           ],
         ),
       ),

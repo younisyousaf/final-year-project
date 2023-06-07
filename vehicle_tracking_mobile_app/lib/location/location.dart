@@ -11,58 +11,57 @@ import 'package:google_maps_flutter/google_maps_flutter.dart' as gm_flutter;
 import 'package:google_maps_flutter_web/google_maps_flutter_web.dart';
 import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart' as perm;
+import 'package:signalr_netcore/signalr_client.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-class CarLocation extends StatefulWidget {
-  final String serverIP;
-  final String serverPort;
-  final String apiURL;
-
-  const CarLocation({
+class LiveLocation extends StatefulWidget {
+  const LiveLocation({
     Key? key,
-    required this.serverIP,
-    required this.serverPort,
-    required this.apiURL,
   }) : super(key: key);
 
   @override
-  _CarLocationState createState() => _CarLocationState();
+  _LiveLocationState createState() => _LiveLocationState();
 }
 
-class _CarLocationState extends State<CarLocation> {
+class _LiveLocationState extends State<LiveLocation> {
   GoogleMapController? mapController;
   List<gm_flutter.Marker> markers = [];
   LocationData? currentLocation;
   Location location = Location();
-  StreamSubscription<LocationData>? locationSubscription;
-  Socket? socket;
+  final _serverUrl = "localhost:3001/signalr";
+  final _storage = const FlutterSecureStorage();
 
   @override
   void initState() {
     super.initState();
-    checkLocationPermissions();
-    locationSubscription =
-        location.onLocationChanged.listen((LocationData locationData) {
-      setState(() {
-        currentLocation = locationData;
-        updateMarker();
-        sendDataToServer();
-      });
-    });
+
+    final httpConnectionOptions = HttpConnectionOptions(
+        transport: HttpTransportType.WebSockets,
+        accessTokenFactory: () => getAccessToken());
+
+    final hubConnection = HubConnectionBuilder()
+        .withUrl(_serverUrl, options: httpConnectionOptions)
+        .withAutomaticReconnect(
+            retryDelays: [2000, 5000, 10000, 20000]).build();
+    hubConnection.start();
+    hubConnection.on("GetAll", _handleAClientProvidedFunction);
   }
 
   @override
   void dispose() {
-    locationSubscription?.cancel();
-    socket?.close();
     super.dispose();
   }
 
-  Future<void> checkLocationPermissions() async {
-    final perm.PermissionStatus status =
-        await perm.Permission.location.request();
-    if (status != perm.PermissionStatus.granted) {
-      print("Your Location is not granted, Turn on your Location");
+  void _handleAClientProvidedFunction(List<Object?>? parameters) {
+    print(parameters);
+  }
+
+  Future<String> getAccessToken() async {
+    final token = await _storage.read(key: 'access_token');
+    if (token == null) {
+      return "";
     }
+    return token;
   }
 
   void updateMarker() {
@@ -82,48 +81,11 @@ class _CarLocationState extends State<CarLocation> {
     }
   }
 
-  Future<void> sendDataToServer() async {
-    try {
-      if (socket == null || socket?.write == null) {
-        // Establish a new TCP connection
-        socket = await Socket.connect(
-          widget.serverIP,
-          int.parse(widget.serverPort),
-          sourceAddress: widget.apiURL,
-        );
-      }
-
-      final locationData = currentLocation!;
-      final data =
-          'Location: ${locationData.latitude},${locationData.longitude}';
-
-      // Send data to the server
-      socket?.write(data);
-
-      // Optionally, wait for a response from the server
-      final response = await socket
-          ?.transform(utf8.decoder as StreamTransformer<Uint8List, dynamic>)
-          .join();
-
-      if (response != null) {
-        print('Server response: $response');
-        print("Data is Sent to the server");
-      } else {
-        print("Data transmission failed");
-      }
-    } catch (e) {
-      print('Error connecting to the server: $e');
-      socket?.close();
-      socket = null;
-      print("Data transmission failed");
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text("Vehicle Location\t\t")),
+        title: const Center(child: Text("Live Tracking\t\t")),
         backgroundColor: const Color.fromARGB(255, 27, 187, 1),
         leading: null,
       ),
