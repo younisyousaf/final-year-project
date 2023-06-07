@@ -53,12 +53,6 @@
     <true/>
 <key>NSLocationWhenInUseUsageDescription</key>
 <string>As I am developing a Vehicle Trackig App, so for Tracking Purpose I want to use Location of Device.</string>
-<key>NSLocationWhenInUseUsageDescription</key>
-<string>Your description here</string>
-<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-<string>Your description here</string>
-<key>NSLocationAlwaysUsageDescription</key>
-<string>Your description here</string>
 
 
 </dict>
