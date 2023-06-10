@@ -13,7 +13,7 @@ export function AdminLayout(props: IAdminLayout) {
       <AdminLayoutSideBar />
       <div className="ml-64 flex min-h-screen flex-1 flex-col bg-gray-100">
         <AdminLayoutNavBar />
-        <div className="flex flex-grow flex-col gap-y-4 p-4">
+        <div className="flex flex-grow flex-col gap-y-4 p-4 z-0">
           {props.children}
         </div>
       </div>
