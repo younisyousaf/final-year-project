@@ -8,11 +8,11 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as gm_flutter;
-import 'package:google_maps_flutter_web/google_maps_flutter_web.dart';
-import 'package:location/location.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart' as perm;
 import 'package:signalr_netcore/signalr_client.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:geolocator/geolocator.dart';
 
 class LiveLocation extends StatefulWidget {
   const LiveLocation({
@@ -26,8 +26,6 @@ class LiveLocation extends StatefulWidget {
 class _LiveLocationState extends State<LiveLocation> {
   GoogleMapController? mapController;
   List<gm_flutter.Marker> markers = [];
-  LocationData? currentLocation;
-  Location location = Location();
   final _serverUrl = "localhost:3001/signalr";
   final _storage = const FlutterSecureStorage();
 
@@ -35,16 +33,16 @@ class _LiveLocationState extends State<LiveLocation> {
   void initState() {
     super.initState();
 
-    final httpConnectionOptions = HttpConnectionOptions(
-        transport: HttpTransportType.WebSockets,
-        accessTokenFactory: () => getAccessToken());
+    // final httpConnectionOptions = HttpConnectionOptions(
+    //     transport: HttpTransportType.WebSockets,
+    //     accessTokenFactory: () => getAccessToken());
 
-    final hubConnection = HubConnectionBuilder()
-        .withUrl(_serverUrl, options: httpConnectionOptions)
-        .withAutomaticReconnect(
-            retryDelays: [2000, 5000, 10000, 20000]).build();
-    hubConnection.start();
-    hubConnection.on("GetAll", _handleAClientProvidedFunction);
+    // final hubConnection = HubConnectionBuilder()
+    //     .withUrl(_serverUrl, options: httpConnectionOptions)
+    //     .withAutomaticReconnect(
+    //         retryDelays: [2000, 5000, 10000, 20000]).build();
+    // hubConnection.start();
+    // hubConnection.on("GetAll", _handleAClientProvidedFunction);
   }
 
   @override
@@ -52,9 +50,9 @@ class _LiveLocationState extends State<LiveLocation> {
     super.dispose();
   }
 
-  void _handleAClientProvidedFunction(List<Object?>? parameters) {
-    print(parameters);
-  }
+  // void _handleAClientProvidedFunction(List<Object?>? parameters) {
+  //   print(parameters);
+  // }
 
   Future<String> getAccessToken() async {
     final token = await _storage.read(key: 'access_token');
@@ -64,10 +62,13 @@ class _LiveLocationState extends State<LiveLocation> {
     return token;
   }
 
-  void updateMarker() {
-    if (currentLocation != null) {
-      final gm_flutter.LatLng newPosition = gm_flutter.LatLng(
-          currentLocation!.latitude!, currentLocation!.longitude!);
+  void updateMarker() async {
+    Position position = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.best,
+    );
+    if (position != null) {
+      final gm_flutter.LatLng newPosition =
+          gm_flutter.LatLng(position.latitude, position.longitude!);
       setState(() {
         markers = [
           gm_flutter.Marker(
