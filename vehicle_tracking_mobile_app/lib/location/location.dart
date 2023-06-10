@@ -87,7 +87,7 @@ class _LiveLocationState extends State<LiveLocation> {
     return Scaffold(
       appBar: AppBar(
         title: const Center(child: Text("Live Tracking\t\t")),
-        backgroundColor: const Color.fromARGB(255, 27, 187, 1),
+        backgroundColor: const Color.fromARGB(255, 31, 41, 55),
         leading: null,
       ),
       body: Column(

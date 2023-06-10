@@ -9,7 +9,7 @@
 
    <application
         android:label="vehicle_tracking_mobile_app"
-        android:name="${applicationName}"
+      
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
@@ -43,5 +43,6 @@
             android:value="2" />
             <meta-data android:name="com.google.android.geo.API_KEY"
             android:value='AIzaSyDkHVgg38HaGKE6s1W6obuO4wpCfOaC5kM'/>
+     
     </application>
 </manifest>

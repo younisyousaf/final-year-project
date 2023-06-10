@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_declarations, avoid_print, library_private_types_in_public_api
+// ignore_for_file: prefer_const_declarations, avoid_print, library_private_types_in_public_api, unnecessary_null_comparison
 
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -68,12 +68,18 @@ class _ServerSettingsDialogState extends State<ServerSettingsDialog> {
       ),
       actions: [
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color.fromARGB(255, 31, 41, 55),
+          ),
           onPressed: () {
             Navigator.of(context).pop();
           },
           child: const Text('Cancel'),
         ),
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color.fromARGB(255, 31, 41, 55),
+          ),
           onPressed: () {
             if (_formKey.currentState!.validate()) {
               final ip = _ipController.text;
@@ -223,9 +229,20 @@ class _StartTrackingState extends State<StartTracking> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 27, 187, 1),
+        backgroundColor: const Color.fromARGB(255, 17, 24, 39),
         leading: null,
         automaticallyImplyLeading: false,
+        title: Center(
+          child: Container(
+            margin: const EdgeInsets.only(
+              left: 22,
+            ),
+            child: Image.asset(
+              'assets/images/vtrack.png',
+              height: 40,
+            ),
+          ),
+        ),
         actions: [
           Builder(
             builder: (BuildContext context) {
@@ -238,22 +255,41 @@ class _StartTrackingState extends State<StartTracking> {
               );
             },
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const LiveLocation(),
-                ),
-              );
-            },
-            child: const Text('Live!'),
-          ),
         ],
       ),
       body: Center(
         child: Column(
           children: [
+            const SizedBox(
+              height: 15,
+            ),
+            Container(
+              margin: const EdgeInsets.only(
+                  // right: 90,
+                  ),
+              height: 50,
+              width: 250,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 17, 24, 39),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20), // <-- Radius
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LiveLocation(),
+                    ),
+                  );
+                },
+                child: const Text(
+                  'View Live Location!',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+            ),
             const SizedBox(
               height: 20,
             ),
@@ -264,46 +300,50 @@ class _StartTrackingState extends State<StartTracking> {
               ),
             ),
             Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: GestureDetector(
-                  onTap: () {
-                    if (isTracking) {
-                      _stopTracking();
-                    } else {
-                      _startTracking();
-                    }
-                  },
-                  onTapDown: (details) {
-                    setState(() {
-                      isHovered = true;
-                    });
-                  },
-                  onTapCancel: () {
-                    setState(() {
-                      isHovered = false;
-                    });
-                  },
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      boxShadow: isHovered
-                          ? [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 5,
-                                blurRadius: 10,
-                                offset: const Offset(0, 3),
-                              ),
-                            ]
-                          : [],
-                    ),
-                    child: CircleAvatar(
-                      radius: 60.0,
-                      backgroundColor: Color.fromARGB(255, 27, 187, 1),
+              padding: const EdgeInsets.all(20.0),
+              child: GestureDetector(
+                onTap: () {
+                  if (isTracking) {
+                    _stopTracking();
+                  } else {
+                    _startTracking();
+                  }
+                },
+                onTapDown: (details) {
+                  setState(() {
+                    isHovered = true;
+                  });
+                },
+                onTapCancel: () {
+                  setState(() {
+                    isHovered = false;
+                  });
+                },
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: isHovered
+                        ? [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 5,
+                              blurRadius: 10,
+                              offset: const Offset(0, 3),
+                            ),
+                          ]
+                        : [],
+                  ),
+                  child: CircleAvatar(
+                    radius: 60.0,
+                    backgroundColor: const Color.fromARGB(255, 31, 41, 55),
+                    child: Container(
+                      alignment: Alignment.center,
                       child: Text(
-                        isTracking ? 'Stop' : 'Start',
-                        style: TextStyle(
+                        isTracking
+                            ? '\t\t\tStop\nTracking'
+                            : '\t\t\tStart\nTracking',
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
                           color: Colors.white,
@@ -311,7 +351,9 @@ class _StartTrackingState extends State<StartTracking> {
                       ),
                     ),
                   ),
-                )),
+                ),
+              ),
+            ),
           ],
         ),
       ),
