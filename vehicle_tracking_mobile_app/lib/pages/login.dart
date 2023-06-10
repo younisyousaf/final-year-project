@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unused_local_variable, avoid_print, use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -10,7 +10,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 const FlutterSecureStorage secureStorage = FlutterSecureStorage();
 
 class Login extends StatefulWidget {
-  const Login({super.key});
+  const Login({Key? key}) : super(key: key);
 
   @override
   State<Login> createState() => _LoginState();
@@ -19,6 +19,33 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  void _showErrorBottomSheet(String errorMessage) {
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 80, // Set the desired height here
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10),
+              topRight: Radius.circular(10),
+            ),
+          ),
+          child: Center(
+            child: Text(
+              errorMessage,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   Future<void> loginWithPasswordGrantType() async {
     final username = _usernameController.text;
@@ -52,11 +79,15 @@ class _LoginState extends State<Login> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => StartTracking(),
+            builder: (context) => const StartTracking(),
           ),
         );
+      } else if (response.statusCode == 400) {
+        final Map<String, dynamic> errorResponse = json.decode(response.body);
+        final errorMessage = errorResponse['error_description'];
+        _showErrorBottomSheet(errorMessage);
       } else {
-        // Handle the error response
+        // Handle other error responses
         print('Error logging in with password grant type');
       }
     } catch (e) {
@@ -64,325 +95,198 @@ class _LoginState extends State<Login> {
     }
   }
 
+  bool validateEmail(String email) {
+    if (email.isEmpty) {
+      _showErrorBottomSheet('Please Enter Your Email');
+      return false;
+    }
+
+    if (!email.contains('@')) {
+      _showErrorBottomSheet('Invalid email');
+      return false;
+    }
+    return true;
+  }
+
+  bool validatePassword(String password) {
+    if (password.isEmpty) {
+      _showErrorBottomSheet('Please Enter Your Password');
+      return false;
+    }
+
+    return true;
+  }
+
+  void login() {
+    final email = _usernameController.text;
+    final password = _passwordController.text;
+
+    if (email.isEmpty && password.isEmpty) {
+      _showErrorBottomSheet('Please Enter your Email and Password');
+      return;
+    }
+
+    if (validateEmail(email) && validatePassword(password)) {
+      loginWithPasswordGrantType();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      appBar: AppBar(
+        leading: null,
+        automaticallyImplyLeading: false,
+        title: Center(
+          child: Image.asset(
+            'assets/images/vtrack.png',
+            height: 40,
+          ),
+        ),
+        backgroundColor: const Color.fromARGB(255, 17, 24, 39),
+      ),
       body: ListView(
         children: [
-          Container(
-            alignment: Alignment.center,
-            child: Text(
-              "Login",
-              style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(padding: EdgeInsets.all(15)),
-              Container(
-                margin: EdgeInsets.only(left: 15, bottom: 5),
+              const Padding(padding: EdgeInsets.all(15)),
+              const Center(
                 child: Text(
-                  "Email",
+                  "Login to VTrack!",
                   style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: 15, bottom: 5),
+                child: const Center(
+                  child: Text(
+                    "Email",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
               SizedBox(
-                width: 400,
+                width: 445,
+                height: 50,
                 child: Container(
-                  margin: EdgeInsets.only(
+                  margin: const EdgeInsets.only(
                     left: 15,
                     right: 15,
                   ),
                   child: TextFormField(
+                    cursorColor: const Color.fromARGB(255, 31, 41, 55),
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Color.fromRGBO(237, 236, 236, 1),
-                      // hintText: "Enter Your Email",
+                      fillColor: const Color.fromRGBO(237, 236, 236, 1),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Color.fromRGBO(237, 236, 236, 1),
+                          width: 2,
                         ),
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(30),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: const BorderSide(
                           width: 2,
-                          color: Color.fromRGBO(237, 236, 236, 1),
+                          color: Color.fromARGB(255, 31, 41, 55),
                         ),
                       ),
                     ),
                     controller: _usernameController,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter the valid email';
-                      }
-                      return null;
-                    },
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Container(
-                margin: EdgeInsets.only(left: 15, bottom: 5),
-                child: Text(
-                  "Password",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
+                margin: const EdgeInsets.only(left: 20, bottom: 5),
+                child: const Center(
+                  child: Text(
+                    "Password",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
               SizedBox(
-                width: 400,
+                width: 445,
+                height: 50,
                 child: Container(
-                  margin: EdgeInsets.only(
+                  margin: const EdgeInsets.only(
                     left: 15,
                     right: 15,
                   ),
                   child: TextFormField(
                     obscureText: true,
+                    cursorColor: const Color.fromARGB(255, 31, 41, 55),
                     decoration: InputDecoration(
                       filled: true,
-                      fillColor: Color.fromRGBO(237, 236, 236, 1),
-                      // hintText: "Enter Your Password",
+                      fillColor: const Color.fromRGBO(237, 236, 236, 1),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: const BorderSide(
                           width: 2,
                           color: Color.fromRGBO(237, 236, 236, 1),
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: const BorderSide(
                           width: 2,
-                          color: Color.fromRGBO(237, 236, 236, 1),
+                          color: Color.fromARGB(255, 31, 41, 55),
                         ),
                       ),
                     ),
                     controller: _passwordController,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Please enter the password';
-                      }
-                      return null;
-                    },
                   ),
                 ),
               ),
-              SizedBox(
-                height: 35,
-              ),
-              Container(
-                width: 385,
-                height: 60,
-                margin: EdgeInsets.only(
-                  left: 15,
-                  right: 15,
-                ),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 27, 187, 1),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  onPressed: () async {
-                    await loginWithPasswordGrantType();
-                  },
-                  child: Text(
-                    "Login",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                ),
+              const SizedBox(
+                height: 30,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  TextButton(
-                    onPressed: () {},
-                    child: Container(
-                      margin: EdgeInsets.only(right: 10),
-                      child: Text(
-                        "Forgot Password?",
+                  SizedBox(
+                    width: 130,
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: login,
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        backgroundColor: const Color.fromARGB(255, 17, 24, 39),
+                      ),
+                      child: const Text(
+                        "Login",
                         style: TextStyle(
-                          color: Colors.black87,
-                          fontSize: 17,
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
                   ),
                 ],
               ),
-              SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Container(
-                      margin: const EdgeInsets.only(left: 15.0, right: 50.0),
-                      child: Divider(
-                        color: Colors.black,
-                        height: 36,
-                        thickness: 1.3,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    "or",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      margin: const EdgeInsets.only(left: 50.0, right: 15.0),
-                      child: Divider(
-                        color: Colors.black,
-                        height: 36,
-                        thickness: 1.3,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                width: 385,
-                height: 60,
-                margin:
-                    EdgeInsets.only(top: 10, bottom: 10, left: 15, right: 15),
-                child: Directionality(
-                  textDirection: TextDirection.ltr,
-                  child: OutlinedButton(
-                    onPressed: null,
-                    style: OutlinedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      side: BorderSide(
-                        width: 2.0,
-                        color: Colors.black87,
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Login with",
-                          style: TextStyle(
-                            color: Colors.black87,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Container(
-                            margin:
-                                EdgeInsets.only(bottom: 10, top: 10, left: 10),
-                            child:
-                                Image.asset('assets/images/Google_logo.png')),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                width: 385,
-                height: 60,
-                margin:
-                    EdgeInsets.only(top: 10, bottom: 10, left: 15, right: 15),
-                child: Directionality(
-                  textDirection: TextDirection.ltr,
-                  child: OutlinedButton(
-                    onPressed: null,
-                    style: OutlinedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      side: BorderSide(
-                        width: 2.0,
-                        color: Colors.black87,
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Login with",
-                          style: TextStyle(
-                            color: Colors.black87,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(bottom: 25),
-                          child: IconButton(
-                            icon: Icon(
-                              Icons.facebook_sharp,
-                              color: Color.fromARGB(255, 5, 24, 236),
-                              size: 45.0,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              // Container(
-              //   margin: EdgeInsets.only(top: 30),
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.center,
-              //     children: [
-              //       Text(
-              //         "Don't Have an Account?",
-              //         style: TextStyle(
-              //           fontSize: 20,
-              //           color: Colors.black,
-              //           fontWeight: FontWeight.w500,
-              //         ),
-              //       ),
-              //       TextButton(
-              //         onPressed: () {
-              //           Navigator.push(
-              //             context,
-              //             MaterialPageRoute(
-              //               builder: (context) => Signup(),
-              //             ),
-              //           );
-              //         },
-              //         child: Text(
-              //           "Signup",
-              //           style: TextStyle(
-              //               color: Color.fromARGB(255, 27, 187, 1),
-              //               fontSize: 20,
-              //               fontWeight: FontWeight.w900),
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
             ],
           ),
         ],

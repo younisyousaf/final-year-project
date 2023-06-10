@@ -21,10 +21,10 @@ class SplashScreen extends StatelessWidget {
                   bottomLeft: Radius.circular(220),
                   bottomRight: Radius.elliptical(70, 5),
                 ),
-                color: Color.fromARGB(255, 27, 187, 1),
+                color: Color.fromARGB(255, 31, 41, 55),
               ),
             ),
-            Padding(padding: EdgeInsets.symmetric(vertical: 10)),
+            // Padding(padding: EdgeInsets.symmetric(vertical: 10)),
             SizedBox(
               // height: 250.0,
               width: 260.0,
@@ -35,27 +35,27 @@ class SplashScreen extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(padding: EdgeInsets.symmetric(vertical: 50)),
+                // Padding(padding: EdgeInsets.symmetric(vertical: 50)),
                 Text(
                   "Locate your",
                   style: TextStyle(
                     fontSize: 50,
-                    fontWeight: FontWeight.w900,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
                 Text(
                   "vehicle",
                   style: TextStyle(
                     fontSize: 50,
-                    fontWeight: FontWeight.w900,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
                 Text(
                   "without Noise\n",
                   style: TextStyle(
                     fontSize: 50,
-                    fontWeight: FontWeight.w900,
-                    color: Color.fromARGB(255, 27, 187, 1),
+                    fontWeight: FontWeight.w700,
+                    color: Color.fromARGB(255, 17, 24, 39),
                   ),
                 ),
               ],
@@ -64,21 +64,21 @@ class SplashScreen extends StatelessWidget {
               margin: EdgeInsets.only(left: 15, right: 15),
               child: SizedBox(
                 width: 370,
-                height: 60,
+                height: 55,
                 child: Directionality(
                   textDirection: TextDirection.rtl,
                   child: ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 27, 187, 1),
+                      backgroundColor: Color.fromARGB(255, 31, 41, 55),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10), // <-- Radius
+                        borderRadius: BorderRadius.circular(20), // <-- Radius
                       ),
                     ),
                     label: Text(
                       "Get Started",
                       style: TextStyle(
                         fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                        // fontWeight: FontWeight.bold,
                       ),
                     ),
                     icon: Icon(Icons.arrow_outward),

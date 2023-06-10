@@ -8,7 +8,8 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart' as gm_flutter;
-import 'package:google_maps_flutter_web/google_maps_flutter_web.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+// import 'package:google_maps_flutter_web/google_maps_flutter_web.dart';
 import 'package:location/location.dart';
 import 'package:permission_handler/permission_handler.dart' as perm;
 import 'package:signalr_netcore/signalr_client.dart';
@@ -86,7 +87,7 @@ class _LiveLocationState extends State<LiveLocation> {
     return Scaffold(
       appBar: AppBar(
         title: const Center(child: Text("Live Tracking\t\t")),
-        backgroundColor: const Color.fromARGB(255, 27, 187, 1),
+        backgroundColor: const Color.fromARGB(255, 31, 41, 55),
         leading: null,
       ),
       body: Column(
