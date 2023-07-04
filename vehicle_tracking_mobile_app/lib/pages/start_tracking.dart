@@ -1,10 +1,9 @@
-// ignore_for_file: prefer_const_declarations, avoid_print, library_private_types_in_public_api, unnecessary_null_comparison
+// ignore_for_file: prefer_const_declarations, avoid_print, library_private_types_in_public_api, unnecessary_null_comparison, unused_local_variable
 
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
-import 'package:device_info/device_info.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 
@@ -167,23 +166,23 @@ class _StartTrackingState extends State<StartTracking> {
   Future<String> getDeviceIdentifier() async {
     String identifier = '';
 
-    try {
-      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-      if (Theme.of(context).platform == TargetPlatform.android) {
-        AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-        identifier = androidInfo.androidId; // Retrieves Android device ID
-      } else if (Theme.of(context).platform == TargetPlatform.iOS) {
-        IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
-        identifier = iosInfo.identifierForVendor; // Retrieves iOS device ID
-      } else {
-        //Note: Web view will use hardcoded device IMEI
-        identifier = '356331110282877';
-      }
-    } catch (e) {
-      print('Error retrieving device identifier: $e');
-    }
+    // try {
+    //   DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    //   if (Theme.of(context).platform == TargetPlatform.android) {
+    //     AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+    //     identifier = androidInfo.androidId; // Retrieves Android device ID
+    //   } else if (Theme.of(context).platform == TargetPlatform.iOS) {
+    //     IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+    //     identifier = iosInfo.identifierForVendor; // Retrieves iOS device ID
+    //   } else {
+    //     //Note: Web view will use hardcoded device IMEI
+    //     identifier = '356331110282877';
+    //   }
+    // } catch (e) {
+    //   print('Error retrieving device identifier: $e');
+    // }
 
-    return identifier;
+    return "861983055813336";
   }
 
   String getCurrentDateTime() {
@@ -196,18 +195,28 @@ class _StartTrackingState extends State<StartTracking> {
     if (_serverIP != null && _serverPort != null) {
       final imei = await getDeviceIdentifier();
       final dateTime = getCurrentDateTime();
+      LocationPermission permission;
+
+      permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.deniedForever) {
+          return Future.error('Location Not Available');
+        }
+      }
+
       Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.best,
       );
 
       final latitude = position.latitude;
       final longitude = position.longitude;
-      final speed = position.speed;
-      final heading = position.heading;
-      final altitude = position.altitude;
+      final speed = position.speed.toInt();
+      final heading = position.heading.toInt();
+      final altitude = position.altitude.toInt();
       final satellites = 0;
       final message =
-          '$imei,$dateTime,$latitude,$longitude,$speed,$heading,$altitude,$satellites';
+          '$imei,$dateTime,$longitude,$latitude,$speed,$heading,$altitude,$satellites';
 
       try {
         _socket = IO.io('http://$_serverIP:$_serverPort', <String, dynamic>{

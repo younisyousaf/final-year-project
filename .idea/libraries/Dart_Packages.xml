@@ -152,7 +152,7 @@
         <entry key="flutter">
           <value>
             <list>
-              <option value="$PROJECT_DIR$/../flutter/packages/flutter/lib" />
+              <option value="D:/flutter_windows_3.10.0-stable/flutter/packages/flutter/lib" />
             </list>
           </value>
         </entry>
@@ -292,14 +292,14 @@
         <entry key="flutter_test">
           <value>
             <list>
-              <option value="$PROJECT_DIR$/../flutter/packages/flutter_test/lib" />
+              <option value="D:/flutter_windows_3.10.0-stable/flutter/packages/flutter_test/lib" />
             </list>
           </value>
         </entry>
         <entry key="flutter_web_plugins">
           <value>
             <list>
-              <option value="$PROJECT_DIR$/../flutter/packages/flutter_web_plugins/lib" />
+              <option value="D:/flutter_windows_3.10.0-stable/flutter/packages/flutter_web_plugins/lib" />
             </list>
           </value>
         </entry>
@@ -740,7 +740,7 @@
         <entry key="sky_engine">
           <value>
             <list>
-              <option value="$PROJECT_DIR$/../flutter/bin/cache/pkg/sky_engine/lib" />
+              <option value="D:/flutter_windows_3.10.0-stable/flutter/bin/cache/pkg/sky_engine/lib" />
             </list>
           </value>
         </entry>
@@ -1001,10 +1001,10 @@
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/vy_string_utils-0.4.5/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/web_socket_channel-2.4.0/lib" />
       <root url="file://$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/wkt_parser-2.0.0/lib" />
-      <root url="file://$PROJECT_DIR$/../flutter/bin/cache/pkg/sky_engine/lib" />
-      <root url="file://$PROJECT_DIR$/../flutter/packages/flutter/lib" />
-      <root url="file://$PROJECT_DIR$/../flutter/packages/flutter_test/lib" />
-      <root url="file://$PROJECT_DIR$/../flutter/packages/flutter_web_plugins/lib" />
+      <root url="file://D:/flutter_windows_3.10.0-stable/flutter/bin/cache/pkg/sky_engine/lib" />
+      <root url="file://D:/flutter_windows_3.10.0-stable/flutter/packages/flutter/lib" />
+      <root url="file://D:/flutter_windows_3.10.0-stable/flutter/packages/flutter_test/lib" />
+      <root url="file://D:/flutter_windows_3.10.0-stable/flutter/packages/flutter_web_plugins/lib" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
